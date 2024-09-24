@@ -1,0 +1,76 @@
+def t1(a):
+    return list(set(a))
+
+
+def t2(a, b):
+    return list(set.union(set(a), set(b)))
+
+
+def t3(s):
+    c = set(x.lower() for x in s.split())
+    return len(c)
+
+
+def t4(a, b):
+    if (a <= b) or (a >= b):
+        return True
+
+    else:
+        return False
+
+
+def t5(a, b):
+    return a.difference(b)
+
+
+def t6(a, b, c):
+    k1 = a.intersection(b, c)
+    k2 = t5(a, set(t2(b, c)))
+    k3 = t5(b, set(t2(c, a)))
+    k4 = t5(c, set(t2(a, b)))
+
+    return k2, k3, k4, k1
+
+
+def t7(s1, s2):
+    x1 = set(x.lower() for x in s1.split())
+    x2 = set(x.lower() for x in s2.split())
+
+    k1 = x1.intersection(x2)
+    k2 = t5(x1, x2)
+    k3 = t5(x2, x1)
+
+    return k1, k2, k3
+
+
+def t8(lst):
+    k = {x for x in range(lst[0], lst[-1] + 1)}
+    lst = set(lst)
+
+    return t5(k, lst)
+
+
+def t9(letters, words):
+    ans = []
+
+    for i in words:
+        l = set(i)
+        if t4(l, letters):
+            ans.append(i)
+
+    return ans
+
+
+print(t1([1, 2, 2, 4]))
+print(t2([1, 2, 3], [4, 5]))
+print(t3("And our hopes and expectations"))
+print(t4({1, 2}, {1, 2, 3}))
+print(t5({1, 2, 3}, {1, 3}))
+print(t6({1, 2}, {2, 3}, {2, 4}))
+print(t7("The quick brown fox jumps over the lazy dog", "The slow turtle jumps under the energetic dog"))
+print(t8([2, 4, 5, 7, 8]))
+
+letters = {'e', 't', 'a'}
+words = ["tea", "ate", "att"]
+
+print(t9(letters, words))
